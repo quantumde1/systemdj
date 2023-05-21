@@ -1,0 +1,9 @@
+{
+	"authors": [
+		"quantumde1"
+	],
+	"copyright": "Copyright © 2023, quantumde1",
+	"description": "Init system with JSON files",
+	"license": "GNU GPLv3",
+	"name": "init"
+}
