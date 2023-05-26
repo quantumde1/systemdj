@@ -1,0 +1,6 @@
+{
+    "name": "Start device manager",
+    "respawn": 8,
+    "executable": "/etc/init/scripts/mdevd.sh",
+    "flags": "-"
+}
