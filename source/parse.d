@@ -20,7 +20,7 @@ void parse_json(string filename) @safe {
 	auto respawn = j["respawn"].integer;
 	respawn.to!int;
 	auto name = j["name"].str;
-	auto ps = execute([j["executable"].str, j["flags"].str]);
+	auto ps = executeShell(j["executable"].str);
 	int x = 0;
 	if (ps.status != 0) {
 		writeln(status[2], " Waiting for start ", name);
