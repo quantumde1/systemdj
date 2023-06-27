@@ -13,7 +13,7 @@ import parse;
 
 void exec_all() {
     writeln("[\033[0;36m INFO \033[0m]", " Starting services...");
-    auto ps = executeShell("/etc/init/enabled/autostart.sh");
+    auto ps = executeShell();
     writeln(ps.output);
 }
 
@@ -26,10 +26,4 @@ int pid_check() @safe {
     writeln("[\033[0;36m INFO \033[0m]", " Welcome to ", distname);
     pid_stat = 0;
     return pid_stat;
-}
-
-void write_services() {
-    auto files = dirEntries("/etc/init/enabled/", SpanMode.shallow);
-    auto fsec = files.to!string;
-    writeln("[\033[0;36m INFO \033[0m]", " Services for autorun: ", fsec);
 }
