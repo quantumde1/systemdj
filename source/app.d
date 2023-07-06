@@ -36,6 +36,9 @@ void main(string[] args) {
 	if (args.length <= 1) {
 		throw new NotEnoughException("Not enough arguments, run help for available commands");
 	}
+	if (args[1] == "list") {
+		parse_list();
+	}
 	if (args[1] == "start") {
 		start(args[2]);
 	}
@@ -59,17 +62,13 @@ void main(string[] args) {
 	}
 	if (args[1] == "autorun") {
 		pid_check();
-		write_services();
 		exec_all();
-		if(fork()) {
-			exit(0);
-		}
 	}
 	if (args[1] == "status") {
 		get_process_status(args[2]);
 	}
 	if (args[1] == "conf") {
-		reconfigure_init;
+		reconfigure_init();
 	}
 	if (args[1] == "poweroff") {
 		stop_all();

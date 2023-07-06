@@ -15,8 +15,6 @@ void enable(string service) @safe {
 	status[3] = "[\033[0;36m INFO \033[0m]";
 	writeln(status[3], " Enabling service ", service);
 	if ("/etc/init/disabled"~service~".json".exists) {
-		std.file.append("/etc/init/enabled/autostart.sh", "systemdjctl start "~service~"\n");
-		std.file.append("/etc/init/enabled/poweroff.sh", "systemdjctl stop "~service~"\n");
 		symlink("/etc/init/disabled/"~service~".json", "/etc/init/enabled/"~service~".json");
 		if ("/etc/init/enabled/"~service~".json".exists) {
 			writeln(status[0], " Successfully enabled ", service);
@@ -27,5 +25,16 @@ void enable(string service) @safe {
 	}
 	else {
 		writeln(status[1], " No such file or directory");
+	}
+}
+
+void parse_list() {
+	auto content = readText("/etc/init/enabled/services.json");
+	JSONValue j = parseJSON(content);
+	auto num = j["number"].integer;
+	for (int i = 0; i <= num; i++) {
+		auto services = j["service"~num.to!string].str;
+		writeln("Service №", num, ": ", services);
+		num = num - num + 1;
 	}
 }

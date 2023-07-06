@@ -13,8 +13,6 @@ import parse;
 
 void exec_all() {
     writeln("[\033[0;36m INFO \033[0m]", " Starting services...");
-    auto ps = executeShell();
-    writeln(ps.output);
 }
 
 int pid_check() @safe {
