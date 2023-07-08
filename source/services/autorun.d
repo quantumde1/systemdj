@@ -16,11 +16,9 @@ void exec_all() {
 }
 
 int pid_check() @safe {
-    auto pid = thisProcessID();
     auto content = readText("/etc/init/conf/main.json");
 	JSONValue j = parseJSON(content);
 	auto distname = j["name"].str;
-    auto pid_stat = 0;
     writeln("[\033[0;36m INFO \033[0m]", " Welcome to ", distname);
     pid_stat = 0;
     return pid_stat;
