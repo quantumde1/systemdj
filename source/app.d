@@ -15,7 +15,6 @@ import services.status;
 import configure;
 import services.poweroff;
 import core.stdc.stdlib;
-extern (C) int fork ();
 
 class NotEnoughException : Exception {
 	this(string msg, string file = __FILE__, size_t line = __LINE__) {
@@ -33,44 +32,41 @@ void help() @safe {
 }
 
 void main(string[] args) {
-	if (args.length <= 1) {
-		throw new NotEnoughException("Not enough arguments, run help for available commands");
-	}
-	if (args[1] == "list") {
-		parse_list();
-	}
-	if (args[1] == "start") {
-		start(args[2]);
-	}
-	if (args[1] == "enable") {
-		enable(args[2]);
-	}
-	if (args[1] == "help") {
-		help();
-	}
-	if (args[1] == "stop") {
-		kill_process(args[2]);
-	}
-	if (args[1] == "disable") {
-		disable(args[2]);
-	}
-	if (args[1] == "journal") {
-		read_log();
-	}
-	if (args[1] == "clearjr") {
-		clear_log();
-	}
-	if (args[1] == "autorun") {
-		pid_check();
-		exec_all();
-	}
-	if (args[1] == "status") {
-		get_process_status(args[2]);
-	}
-	if (args[1] == "conf") {
-		reconfigure_init();
-	}
-	if (args[1] == "poweroff") {
-		stop_all();
+	switch (args[1]) {
+		case "start":
+			start(args[2]);
+			break;
+		case "enable":
+			enable(args[2]);
+			break;
+		case "help":
+			help();
+			break;
+		case "stop":
+			kill_process(args[2]);
+			break;
+		case "disable":
+			disable(args[2]);
+			break;
+		case "journal":
+			read_log();
+			break;
+		case "clearjr":
+			clear_log();
+			break;
+		case "autorun":
+			exec_all();
+			break;
+		case "status":
+			get_process_status(args[2]);
+			break;
+		case "conf":
+			reconfigure_init();
+			break;
+		case "poweroff":
+			stop_all();
+			break;
+		default:
+			writeln("Sorry! No such command.");
 	}
 }
