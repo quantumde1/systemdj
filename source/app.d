@@ -16,12 +16,6 @@ import configure;
 import services.poweroff;
 import core.stdc.stdlib;
 
-class NotEnoughException : Exception {
-	this(string msg, string file = __FILE__, size_t line = __LINE__) {
-		super(msg,file,line);
-	}
-}
-
 void help() @safe {
 	writeln("SystemDJ Init");
 	writeln("For add service to autostart, run init enable <service>");
@@ -68,5 +62,6 @@ void main(string[] args) {
 			break;
 		default:
 			writeln("Sorry! No such command.");
+			break;
 	}
 }
