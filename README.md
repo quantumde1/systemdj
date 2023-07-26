@@ -1,20 +1,31 @@
-# What's this?
-SystemD alternative, written in D and without many dependencies.
+SystemDJ Initialization System.
 
-# How to use?
-Simple run init help and you will see all commands.
+# Readme
+SystemDJ is a simple init system that works with the /sbin/busybox init or any other which can execute second init after them
 
-# Prerequisites
+### Building and installing
 
-Any D compiler, <= 2.7
-dub
+SystemDJ written in D, so it's build system is [```dub```](https://github.com/dlang/dub). After build, you need to create ```/etc/init/enabled``` and ```/etc/init/disabled```. These directories needed by services.
 
-# Building
+### Commands set
 
-In project dir run dub run.
+```systemdjctl journal```
+```systemdjctl autorun```
+```systemdjctl start <service>```
+```systemdjctl stop <service>```
+```systemdjctl enable <service>```
+```systemdjctl disable <service>```
+```systemdjctl clearjr```
 
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/quantumde1/init?style=for-the-badge)
+### What's working?
 
-![GitHub](https://img.shields.io/github/license/quantumde1/init?style=for-the-badge)
+- [x] Autostarting services with other init first
+- [x] Journaling
+- [x] Starting services
+- [x] Enabling services
+- [x] Stopping services (paritally)
+- [x] Disabling services (partially)
 
-![GitHub Repo stars](https://img.shields.io/github/stars/quantumde1/init?style=for-the-badge)
+### Where it aim to be used?
+
+In Underlevel OS, but it can be used in any Linux distribution(Android too because D supports it).
