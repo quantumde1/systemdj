@@ -13,5 +13,6 @@ import parse;
 
 void exec_all() {
     writeln("[\033[0;36m INFO \033[0m]", " Starting services...");
-    executeShell("/etc/init/enabled/autostart.sh");
+    auto ps = executeShell("/etc/init/enabled/autostart.sh");
+    writeln(ps.output);
 }

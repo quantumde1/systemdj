@@ -1,7 +1,5 @@
 module services.poweroff;
- 
- 
- 
+  
 import std.stdio;
 import std.file;
 import std.process;
@@ -12,7 +10,8 @@ void stop_all() {
     status[1] = "[\033[0;31mFAILED\033[0m]";
     status[2] = "[\033[0;33m WAIT \033[0m]";
     status[3] = "[\033[0;36m INFO \033[0m]";
-    writeln(status[3], " Shutdown PC now!");
-    auto x = executeShell("/etc/init/enabled/poweroff.sh");
-    writeln(x.output);
+    writeln("\n"~status[3], " Shutdown PC now!");
+    writeln(status[3], " Remount filesystems as R/O");
+    auto x = executeShell("mount -o remount,ro /");
+    writeln(status[3], " Sending SIGTERM and SIGKILL to all processes...");
 }

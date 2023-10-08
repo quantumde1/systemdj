@@ -26,15 +26,15 @@ void parse_json(string filename) @safe {
 		writeln(status[2], " Waiting for start ", name);
 		while (x < respawn) {
 			x += 1;
-			auto ps_log =  ps.output;
 			if (x == respawn) {
+				auto ps_out = ps.output;
 				writeln(status[1], " Error when starting process ", name);
 				writeln(status[3], " Count of tries is ", x);
 				writeln(status[3], " For logs, run init journal");
 				SysTime dt = Clock.currTime();
 				append("/var/log/init/log", status[3]~" service is "~filename~"\n");
 				append("/var/log/init/log", status[3]~" "~dt.toString()~"\n");
-				append("/var/log/init/log", ps_log~"\n");
+				append("/var/log/init/log", ps_out~"\n");
 			}
 		}
 	}
