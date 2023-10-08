@@ -3,7 +3,7 @@
 		"quantumde1"
 	],
 	"copyright": "Copyright © 2023, quantumde1",
-	"description": "Init system with JSON files",
+	"description": "SystemDJ is init system, written primarly for Underlevel Desktop, Alpine Linux's fork",
 	"license": "GNU GPLv3",
-	"name": "init"
+	"name": "systemdjctl"
 }

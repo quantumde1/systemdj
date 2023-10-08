@@ -9,12 +9,25 @@ SystemDJ written in D, so it's build system is [```dub```](https://github.com/dl
 
 ### Commands set
 
+- Show error journal:
 ```systemdjctl journal```
+
+- Script for system's start(add this to /etc/inittab or something like this): 
 ```systemdjctl autorun```
+
+- Start one from enabled services:
 ```systemdjctl start <service>```
+
+- Stop one from started & running services:
 ```systemdjctl stop <service>```
+
+- Add service from ```/etc/init/disabled/``` to ```/etc/init/enabled```:
 ```systemdjctl enable <service>```
+
+- Remove service from ```/etc/init/enabled```
 ```systemdjctl disable <service>```
+
+- Clear system logging journal:
 ```systemdjctl clearjr```
 
 ### What's working?
