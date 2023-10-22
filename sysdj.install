@@ -33,10 +33,10 @@ ln -sf /opt/mdev.conf /etc/mdev.conf
 
 echo "Now, you will need to write your own init files."
 echo "Example: \
-{
-	"name": "mdev Device Manager",
-	"executable": "/sbin/mdev -d -s",
-	"respawn": 5
+{ \
+	"name": "mdev Device Manager", \
+	"executable": "/sbin/mdev -d -s", \
+	"respawn": 5 \
 }"
 
 echo "Installation finished. Good luck!"
