@@ -49,7 +49,7 @@ echo "{ \"name\": \"Hardware Drivers\", \"executable\": \"find /sys -name modali
 
 echo "{ \"name\": \"Networking support\", \"executable\": \"/bin/busybox udhcpc -i $(ip link show | awk '/UP / {print $2}' | sed 's/://g')\", \"respawn\": 5 }" >> /etc/init/disabled/networking.json
 
-echo "{ \"name\": \"D-Bus IPC Daemon\", \"executable\": \"/usr/bin/dbus-uuidgen --ensure=/etc/machine-id && dbus-daemon --system --nofork --nopidfile --syslog-only\", \"respawn\": 5 }" >> /etc/init/disabled/dbus.json
+echo "{ \"name\": \"D-Bus IPC Daemon\", \"executable\": \"/usr/bin/dbus-uuidgen --ensure=/etc/machine-id && dbus-launch\", \"respawn\": 5 }" >> /etc/init/disabled/dbus.json
 
 systemdjctl enable remount
 systemdjctl enable hwdrivers
