@@ -23,7 +23,7 @@ cd $PWD/systemdj && dub build --build=release
 
 echo "Installing SystemDJ"
 mv ./systemdjctl /bin/systemdjctl > /dev/null 2>&1
-echo "::sysinit:/bin/systemdjctl autostart \n tty1::respawn:/sbin/getty 38400 tty1 \n tty2::respawn:/sbin/getty 38400 tty2" >> /etc/inittab > /dev/null 2>&1
+echo "::sysinit:/bin/systemdjctl autorun \n tty1::respawn:/sbin/getty 38400 tty1 \n tty2::respawn:/sbin/getty 38400 tty2" >> /etc/inittab > /dev/null 2>&1
 
 echo "Installing mdev-like-a-boss"
 mkdir -p /opt/mdev
@@ -31,13 +31,30 @@ git clone https://github.com/slashbeast/mdev-like-a-boss /opt/mdev
 ln -sf /opt/xorg.conf.d/ /etc/X11/xorg.conf.d/
 ln -sf /opt/mdev.conf /etc/mdev.conf
 
-echo "Now, you will need to write your own init files."
-echo "Example: \
-{ \
-	"name": "mdev Device Manager", \
-	"executable": "/sbin/mdev -d -s", \
-	"respawn": 5 \
-}"
+echo "Writing an basic init scripts"
+mkdir -p /etc/init/enabled
+mkdir -p /etc/init/disabled
+echo "{ \
+name: "Mdev Device Manager", \
+executable: "/sbin/mdev -s -d", \
+respawn: 5 \
+}" >> /etc/init/disabled/mdev.json
+
+echo "{ \
+name: "Hardware Drivers", \
+executable: "find /sys -name modalias -type f -print0 2> /dev/null | xargs -0 sort -u | xargs modprobe -b -a 2> /dev/null", \
+respawn: 5 \
+}" >> /etc/init/disabled/hwdrivers.json
+
+echo "{ \
+name: "Networking support", \
+executable: "/bin/busybox udhcpc -i eth0 && /bin/busybox udhcpc -i wlan0", \
+respawn: 5 \
+}" >> /etc/init/disabled/networking.json
+
+systemdjctl enable hwdrivers
+systemdjctl enable mdev
+systemdjctl enable networking
 
 echo "Installation finished. Good luck!"
 
