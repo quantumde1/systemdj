@@ -16,7 +16,6 @@ void enable(string service) @safe {
 	writeln(status[3], " Enabling service ", service);
 	if ("/etc/init/disabled"~service~".json".exists) {
 		std.file.append("/etc/init/enabled/autostart.sh", "systemdjctl start "~service~"\n");
-		std.file.append("/etc/init/enabled/poweroff.sh", "systemdjctl stop "~service~"\n");
 		symlink("/etc/init/disabled/"~service~".json", "/etc/init/enabled/"~service~".json");
 		if ("/etc/init/enabled/"~service~".json".exists) {
 			writeln(status[0], " Successfully enabled ", service);
