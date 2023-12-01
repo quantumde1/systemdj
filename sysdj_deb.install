@@ -40,17 +40,12 @@ ln -sf /opt/mdev/mdev.conf /etc/mdev.conf
 echo "Writing an basic init scripts"
 mkdir -p /etc/init/enabled
 mkdir -p /etc/init/disabled
-
-echo "{ \"name\": \"Remount filesystems\", \"executable\": \"mount -o remount,rw /\", \"respawn\": 5 }" >> /etc/init/disabled/remount.json
-
-echo "{ \"name\": \"Mdev Device Manager\", \"executable\": \"/sbin/mdev -s -d\", \"respawn\": 5 }" >> /etc/init/disabled/mdev.json
-
-echo "{ \"name\": \"Hardware Drivers\", \"executable\": \"find /sys -name modalias -type f -print0 2> /dev/null | xargs -0 sort -u | xargs modprobe -b -a 2> /dev/null\", \"respawn\": 5 }" >> /etc/init/disabled/hwdrivers.json
-
-echo "{ \"name\": \"Networking support\", \"executable\": \"/bin/busybox udhcpc -i $(ip link show | awk '/UP / {print $2}' | sed 's/://g')\", \"respawn\": 5 }" >> /etc/init/disabled/networking.json
-
-echo "{ \"name\": \"D-Bus IPC Daemon\", \"executable\": \"/usr/bin/dbus-uuidgen --ensure=/etc/machine-id && dbus-daemon --system --nofork --nopidfile --syslog-only\", \"respawn\": 5 }" >> /etc/init/disabled/dbus.json
-
+cp ./scripts/* /etc/init/disabled/
+#echo "{ \"name\": \"Remount filesystems\", \"executable\": \"mount -o remount,rw /\", \"respawn\": 5 }" >> /etc/init/disabled/remount.json
+#echo "{ \"name\": \"Mdev Device Manager\", \"executable\": \"/sbin/mdev -s -d\", \"respawn\": 5 }" >> /etc/init/disabled/mdev.json
+#echo "{ \"name\": \"Hardware Drivers\", \"executable\": \"find /sys -name modalias -type f -print0 2> /dev/null | xargs -0 sort -u | xargs modprobe -b -a 2> /dev/null\", \"respawn\": 5 }" >> /etc/init/disabled/hwdrivers.json
+#echo "{ \"name\": \"Networking support\", \"executable\": \"/bin/busybox udhcpc -i $(ip link show | awk '/UP / {print $2}' | sed 's/://g')\", \"respawn\": 5 }" >> /etc/init/disabled/networking.json
+#echo "{ \"name\": \"D-Bus IPC Daemon\", \"executable\": \"/usr/bin/dbus-uuidgen --ensure=/etc/machine-id && dbus-daemon --system --nofork --nopidfile --syslog-only\", \"respawn\": 5 }" >> /etc/init/disabled/dbus.json
 systemdjctl enable remount
 systemdjctl enable hwdrivers
 systemdjctl enable mdev

@@ -1,0 +1,1 @@
+{ "name": "D-Bus IPC Daemon", "executable": "/usr/bin/dbus-launch", "respawn": 5 }

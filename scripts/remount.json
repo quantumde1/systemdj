@@ -1,0 +1,1 @@
+{ "name": "Remount filesystems", "executable": "mount -o remount,rw /", "respawn": 5 }
