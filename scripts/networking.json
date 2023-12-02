@@ -1,1 +1,0 @@
-{ "name": "Networking support", "executable": "wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf && /bin/busybox udhcpc -i wlan0", "respawn": 5 }

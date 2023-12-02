@@ -20,10 +20,8 @@ fi
 
 echo "Downloading source of SystemDJ"
 git clone https://underlevel.ddns.net/git/underlevel/systemdj > /dev/null 2>&1
-
 echo "Building SystemDJ"
 cd $PWD/systemdj && dub build --build=release
-
 echo "Installing SystemDJ"
 mv ./systemdjctl /bin/systemdjctl > /dev/null 2>&1
 cp /etc/inittab /etc/inittab_old
@@ -49,7 +47,6 @@ cp ./scripts/* /etc/init/disabled/
 systemdjctl enable remount
 systemdjctl enable hwdrivers
 systemdjctl enable mdev
-systemdjctl enable networking
 systemdjctl enable dbus
 
 chmod +x /etc/init/enabled/autostart.sh
