@@ -23,7 +23,7 @@ void disable(string service) {
     writeln(status[3], " Disabling service ", service);
     auto path = "/etc/init/enabled/"~service~".json";
     path.remove;
-    removeStringFromFile("/etc/init/enabled/autostart.sh", "systemdjctl start "~service~"\n");
+    removeStringFromFile("/etc/init/enabled/autostart", service~"\n");
     if (!path.exists) {
         writeln(status[0], " Successfully disabled ", service);
     }
