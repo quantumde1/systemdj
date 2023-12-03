@@ -37,7 +37,7 @@ SystemDJ written in D, so it's build system is [```dub```](https://github.com/dl
 - [x] Starting services
 - [x] Enabling services
 - [x] Stopping services (paritally)
-- [x] Disabling services (partially)
+- [x] Disabling services
 
 ### Where it aim to be used?
 
