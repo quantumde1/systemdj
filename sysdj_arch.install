@@ -49,7 +49,6 @@ cp ./scripts/* /etc/init/disabled/
 systemdjctl enable remount
 systemdjctl enable hwdrivers
 systemdjctl enable mdev
-systemdjctl enable networking
 systemdjctl enable dbus
 
 chmod +x /etc/init/enabled/autostart.sh

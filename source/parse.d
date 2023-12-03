@@ -9,7 +9,7 @@ import std.conv;
 import std.datetime;
 import core.time;
 
-void parse_json(string filename) @safe {
+int parse_json(string filename) @safe {
 	string[4] status;
 	status[0] = "[\033[0;32m  OK  \033[0m]";
 	status[1] = "[\033[0;31mFAILED\033[0m]";
@@ -35,10 +35,13 @@ void parse_json(string filename) @safe {
 				append("/var/log/init/log", status[3]~" service is "~filename~"\n");
 				append("/var/log/init/log", status[3]~" "~dt.toString()~"\n");
 				append("/var/log/init/log", ps_out~"\n");
+				return 1;
 			}
 		}
 	}
 	else if (ps.status == 0) {
 		writeln(status[0], " Successfully started ", name);
+		return 0;
 	}
+	return 0;
 }
