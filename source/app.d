@@ -16,13 +16,8 @@ import configure;
 import services.poweroff;
 import core.stdc.stdlib;
 
-void help() @safe {
-	writeln("SystemDJ Init");
-	writeln("For add service to autostart, run init enable <service>");
-	writeln("For start service, run init start <service>");
-	writeln("For remove service from autostart, run init disable <service>");
-	writeln("For journal run init journal");
-	writeln("For clear journal, run clearjr");
+void help() {
+	writeln("systemDJ initialization system.\n\nsystemdjctl [COMMAND] [ARGS]\n\ncommands: start stop enable disable autorun poweroff\n\nas arguments use service name");
 }
 
 void main(string[] args) {
