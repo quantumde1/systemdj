@@ -11,13 +11,11 @@ import services.disable;
 import services.logging;
 import services.autorun;
 import services.stop;
-import services.status;
-import configure;
 import services.poweroff;
 import core.stdc.stdlib;
 
 void help() {
-	writeln("systemDJ initialization system.\n\nsystemdjctl [COMMAND] [ARGS]\n\ncommands: start stop enable disable autorun poweroff\n\nas arguments use service name");
+	writeln("systemDJ initialization system.\n\nsystemdjctl [COMMAND] [ARGS]\n\ncommands: start stop enable disable journal clearjr autorun poweroff\n\nas arguments use service name");
 }
 
 void main(string[] args) {
@@ -46,17 +44,11 @@ void main(string[] args) {
 		case "autorun":
 			exec_all();
 			break;
-		case "status":
-			get_process_status(args[2]);
-			break;
-		case "conf":
-			reconfigure_init();
-			break;
 		case "poweroff":
 			stop_all();
 			break;
 		default:
-			writeln("Sorry! No such command.");
+			writeln("No such command, try help");
 			break;
 	}
 }
