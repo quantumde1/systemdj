@@ -19,10 +19,10 @@ void exec_all() {
     status[2] = "[\033[0;33m WAIT \033[0m]";
     auto fileContents = File("/etc/init/enabled/autostart");
     if ("/var/log/init/".exists) {
-        writeln(status[3], " Log directory exists");
+        writeln(status[0], " Log directory exists");
     }
     else {
-        writeln(status[3], " Log directory not exists, creating first");
+        writeln(status[2], " Log directory not exists, creating first");
         mkdir("/var/log/init/");
     }
     foreach (line; fileContents.byLine())
