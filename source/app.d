@@ -23,7 +23,7 @@ void main()
     exec_all();
     while (true)
     {
-        auto p = spawnProcess("getty");
+        auto p = spawnProcess("getty 38400 tty1");
         p.wait();
         writeln("getty exited, restarting...");
     }
