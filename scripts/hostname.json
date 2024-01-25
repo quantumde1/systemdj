@@ -1,0 +1,6 @@
+{
+    "name": "Setting up hostname",
+    "executable": "hostname linux",
+    "respawn": 1,
+    "deps": ["remount"]
+}

@@ -1,1 +1,0 @@
-{ "name": "mdev Device Manager", "executable": "echo \"/sbin/hotplug\" >> /proc/sys/kernel/hotplug && /sbin/mdev -s -d", "respawn": 5 }

@@ -1,1 +1,6 @@
-{ "name": "D-Bus IPC Daemon", "executable": "/usr/bin/dbus-launch", "respawn": 5 }
+{
+    "name": "D-Bus IPC Daemon",
+    "executable": "/usr/bin/dbus-daemon --system --nopidfile --syslog-only",
+    "respawn": 5,
+    "deps": ["hwdrivers", "udev", "remount"]
+}

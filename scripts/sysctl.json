@@ -1,0 +1,6 @@
+{
+    "name": "Setting kernel parameters",
+    "executable": "sysctl -q -p",
+    "respawn": 1,
+    "deps": ["remount"]
+}

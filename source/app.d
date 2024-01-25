@@ -22,8 +22,15 @@ void main()
     exec_all();
     while (true)
     {
-        auto p = spawnProcess(["getty", "38400", "tty1"]);
-        p.wait();
-        writeln("getty exited, restarting...");
+        if ("/etc/init/getty".exists) {
+            auto p = spawnProcess([readText("/etc/init/getty"), "38400", "tty1"]);
+            p.wait();
+            writeln("getty exited, restarting...");
+        }
+        else {
+            auto p = spawnProcess(["getty", "38400", "tty1"]);
+            p.wait();
+            writeln("getty exited, restarting...");
+        }
     }
 }

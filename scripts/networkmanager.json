@@ -1,0 +1,6 @@
+{
+    "name": "NetworkManager networking daemon",
+    "executable": "NetworkManager",
+    "respawn": 5,
+    "deps": ["dbus", "udev"]
+}

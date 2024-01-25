@@ -1,0 +1,6 @@
+{
+    "name": "Bluetooth daemon",
+    "executable": "/usr/libexec/bluetoothd",
+    "respawn": 5,
+    "deps": ["dbus", "udev"]
+}
