@@ -6,7 +6,6 @@ import std.process;
 import std.conv;
 import parse;
 import services.autorun;
-import services.poweroff;
 import core.stdc.stdlib;
 import std.exception;
 import std.array;
@@ -23,7 +22,7 @@ void main()
     exec_all();
     while (true)
     {
-        auto p = spawnProcess("/sbin/getty 38400 tty1");
+        auto p = spawnProcess(["getty", "38400", "tty1"]);
         p.wait();
         writeln("getty exited, restarting...");
     }

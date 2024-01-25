@@ -33,6 +33,5 @@ void exec_all() {
         } else {
             writeln(status[1], " Service file not found ", serviceFilePath);
         }
-        //writeln(line);
     }
 }
