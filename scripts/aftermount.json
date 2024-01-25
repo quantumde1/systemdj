@@ -1,0 +1,6 @@
+{
+    "name": "Mounting all other filesystems",
+    "executable": "mount --all --test-opts no_netdev",
+    "respawn": 5,
+    "deps": ["remount", "premount"]
+}
