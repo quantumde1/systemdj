@@ -9,7 +9,7 @@ import std.conv;
 import std.datetime;
 import core.time;
 
-int parse_json(string filename) @safe {
+int parse_json(string filename, bool logs) @safe {
 	string[4] status;
 	status[0] = "[\033[0;32m  OK  \033[0m]";
 	status[1] = "[\033[0;31mFAILED\033[0m]";
@@ -30,11 +30,16 @@ int parse_json(string filename) @safe {
 				auto ps_out = ps.output;
 				writeln(status[1], " Error when starting process ", name);
 				writeln(status[3], " Count of tries is ", x);
-				writeln(status[3], " For logs, run init journal");
-				SysTime dt = Clock.currTime();
-				append("/var/log/init/log", status[3]~" service is "~filename~"\n");
-				append("/var/log/init/log", status[3]~" "~dt.toString()~"\n");
-				append("/var/log/init/log", ps_out~"\n");
+				if (logs == true) {
+					writeln(status[3], " For logs, run init journal");
+					SysTime dt = Clock.currTime();
+					append("/var/log/init/log", status[3]~" service is "~filename~"\n");
+					append("/var/log/init/log", status[3]~" "~dt.toString()~"\n");
+					append("/var/log/init/log", ps_out~"\n");
+				}
+				else if (logs == false) {
+					writeln(status[3], " You don't have /var/log/init/ directory. So there is no logs.");
+				}
 				return 1;
 			}
 		}

@@ -13,6 +13,7 @@ import parse;
 
 
 void exec_all() {
+    bool logs;
     string[3] status;
 	status[0] = "[\033[0;32m  OK  \033[0m]";
 	status[1] = "[\033[0;31mFAILED\033[0m]";
@@ -20,16 +21,18 @@ void exec_all() {
     auto fileContents = File("/etc/init/enabled/autostart");
     if ("/var/log/init/".exists) {
         writeln(status[0], " Log directory exists");
+        logs = true;
     }
     else {
-        writeln(status[2], " Log directory not exists, creating first");
-        mkdir("/var/log/init/");
+        writeln(status[2], " Log directory not exists, please, create it after boot ends.
+Disabling logging.");
+        logs = false;
     }
     foreach (line; fileContents.byLine())
     {
         auto serviceFilePath = "/etc/init/enabled/" ~ line ~ ".json";
         if (exists(serviceFilePath)) {
-            parse_json(serviceFilePath.to!string);
+            parse_json(serviceFilePath.to!string, logs);
         } else {
             writeln(status[1], " Service file not found ", serviceFilePath);
         }
