@@ -2,5 +2,6 @@
     "name": "Remount filesystems",
     "executable": "mount -o remount,rw /",
     "respawn": 5,
-    "deps": ["premount"]
+    "deps": ["premount"],
+    "type": "oneshot"
 }

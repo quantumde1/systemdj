@@ -1,0 +1,7 @@
+{
+	"name": "Mounting /boot/efi",
+	"executable": "mount -t vfat /dev/nvme0n1p1 /boot/efi",
+	"respawn": 5,
+	"deps": ["remount"],
+	"type": "oneshot"
+}

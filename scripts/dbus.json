@@ -1,6 +1,7 @@
 {
     "name": "D-Bus IPC Daemon",
-    "executable": "/usr/bin/dbus-daemon --system --nopidfile --syslog-only",
+    "executable": "/usr/bin/dbus-daemon --syslog-only --nopidfile --system",
     "respawn": 5,
-    "deps": ["hwdrivers", "udev", "remount"]
+    "deps": ["hwdrivers", "udev", "remount"],
+    "type": "daemon"
 }

@@ -1,6 +1,7 @@
 {
     "name": "Setting up hostname",
-    "executable": "hostname linux",
+    "executable": "hostname -F /etc/hostname",
     "respawn": 1,
-    "deps": ["remount"]
+    "deps": ["remount"],
+    "type": "oneshot"
 }

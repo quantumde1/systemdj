@@ -1,6 +1,7 @@
 {
-    "name": "Mounting all other filesystems",
-    "executable": "mount --all --test-opts no_netdev",
+    "name": "Mounting all other filesystems and creating files",
+    "executable": "mount --all --test-opts && mount tmpfs /tmp -t tmpfs && mkdir /run/dbus",
     "respawn": 5,
-    "deps": ["remount", "premount"]
+    "deps": ["remount", "premount"],
+    "type": "oneshot"
 }

@@ -1,6 +1,7 @@
 {
     "name": "Hardware Drivers",
     "executable": "find /sys -name modalias -type f -print0 2> /dev/null | xargs -0 sort -u | xargs modprobe -b -a 2> /dev/null",
-    "respawn": 5,
-    "deps": ["remount", "premount"]
+    "respawn": 0,
+    "deps": ["remount", "premount"],
+    "type": "oneshot"
 }

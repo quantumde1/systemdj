@@ -2,5 +2,6 @@
     "name": "Mounting efivarfs",
     "executable": "mount -t efivarfs none /sys/firmware/efi/efivars",
     "respawn": 5,
-    "deps": ["remount", "premount", "udev"]
+    "deps": ["remount", "premount", "udev"],
+    "type": "oneshot"
 }

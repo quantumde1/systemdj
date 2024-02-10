@@ -1,0 +1,7 @@
+{
+	"name": "KDE Plasma Display Manager",
+	"executable": "/usr/bin/sddm",
+	"respawn": 5,
+	"deps": ["udev", "dbus"],
+	"type": "daemon"
+}
