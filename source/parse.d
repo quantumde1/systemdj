@@ -8,6 +8,7 @@ import std.process;
 import std.conv;
 import std.datetime;
 import core.time;
+import std.path;
 
 int parse_json(string filename, bool logs) @safe {
 	string[4] status;
@@ -19,6 +20,10 @@ int parse_json(string filename, bool logs) @safe {
 	JSONValue j = parseJSON(content);
 	auto respawn = j["respawn"].integer;
 	respawn.to!int;
+	auto type = j["type"].str;
+	if (type != null && type == "daemon") {
+		std.file.write("/tmp/"~baseName(filename, ".json")~".process", j["executable"].str);
+	}
 	auto name = j["name"].str;
 	auto ps = executeShell(j["executable"].str);
 	int x = 0;
