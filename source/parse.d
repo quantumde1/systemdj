@@ -9,8 +9,10 @@ import std.conv;
 import std.datetime;
 import core.time;
 import std.path;
+import std.array;
+import services.supervisor;
 
-int parse_json(string filename, bool logs) @safe {
+int parse_json(string filename, bool logs) {
 	string[4] status;
 	status[0] = "[\033[0;32m  OK  \033[0m]";
 	status[1] = "[\033[0;31mFAILED\033[0m]";
@@ -20,11 +22,19 @@ int parse_json(string filename, bool logs) @safe {
 	JSONValue j = parseJSON(content);
 	auto respawn = j["respawn"].integer;
 	respawn.to!int;
+	auto name = j["name"].str;
 	auto type = j["type"].str;
+	if (type == "supervised") {
+		string executableString = j["executable"].str;
+        string[] words = split(executableString);
+        supervisor(words[0 .. $]);
+        std.file.write("/tmp/"~baseName(filename, ".json")~".process", words[0]);
+    	writeln(status[0], " Successfully started ", name);
+        return 0;
+	}
 	if (type != null && type == "daemon") {
 		std.file.write("/tmp/"~baseName(filename, ".json")~".process", j["executable"].str);
 	}
-	auto name = j["name"].str;
 	auto ps = executeShell(j["executable"].str);
 	int x = 0;
 	if (ps.status != 0) {
