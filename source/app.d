@@ -12,6 +12,8 @@ import std.array;
 import core.sys.posix.sys.types;
 import core.sys.posix.unistd;
 
+pid_t waitpid(pid_t pid, int *status, int options);
+
 void main()
 {
     if (getpid() != 1) {
@@ -32,7 +34,7 @@ void main()
             p.wait();
             writeln("getty exited, restarting...");
         }
-        while (waitpid(-1, null, WNOHANG) > 0) {
+        while (waitpid(-1, null, 1) > 0) {
         }
         sleep(10);
     }
