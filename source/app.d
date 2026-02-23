@@ -22,16 +22,15 @@ void main()
     }
     writeln("Starting initialization!");
     exec_all();
+    if ("/etc/init/getty".exists) {
+        auto p = spawnProcess([readText("/etc/init/getty"), "38400", "tty1"]);
+    }
+    else {
+        auto p = spawnProcess(["getty", "38400", "tty1"]);
+    }
     while (true)
     {
-        if ("/etc/init/getty".exists) {
-            auto p = spawnProcess([readText("/etc/init/getty"), "38400", "tty1"]);
-        }
-        else {
-            auto p = spawnProcess(["getty", "38400", "tty1"]);
-        }
         while (waitpid(-1, null, 1) > 0) {
-            writeln("we're in waitpid!")
         }
         sleep(10);
     }
