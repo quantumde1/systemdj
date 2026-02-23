@@ -32,5 +32,8 @@ void main()
             p.wait();
             writeln("getty exited, restarting...");
         }
+        while (waitpid(-1, null, WNOHANG) > 0) {
+        }
+        sleep(10);
     }
 }
