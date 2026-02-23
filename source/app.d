@@ -1,9 +1,6 @@
 import std.stdio;
-import std.json;
 import std.file;
-import std.utf;
 import std.process;
-import std.conv;
 import parse;
 import services.autorun;
 import core.stdc.stdlib;
@@ -12,7 +9,7 @@ import std.array;
 import core.sys.posix.sys.types;
 import core.sys.posix.unistd;
 
-pid_t waitpid(pid_t pid, int *status, int options);
+extern (C) pid_t waitpid(pid_t pid, int *status, int options);
 
 void main()
 {
