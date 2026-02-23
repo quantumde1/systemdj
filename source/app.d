@@ -26,15 +26,12 @@ void main()
     {
         if ("/etc/init/getty".exists) {
             auto p = spawnProcess([readText("/etc/init/getty"), "38400", "tty1"]);
-            p.wait();
-            writeln("getty exited, restarting...");
         }
         else {
             auto p = spawnProcess(["getty", "38400", "tty1"]);
-            p.wait();
-            writeln("getty exited, restarting...");
         }
         while (waitpid(-1, null, 1) > 0) {
+            writeln("we're in waitpid!")
         }
         sleep(10);
     }
